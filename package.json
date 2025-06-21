@@ -1,10 +1,17 @@
 {
     "name": "com.simcore.time",
     "version": "0.1.0-pre",
-    "displayName": "SimCore Time System",
+    "displayName": "SimCore-Time-System",
     "description": "Reuseable ECS simulation time control system",
     "unity": "6.1",
     "dependencies": {
         "com.unity.entities": "1.2.0"
-    }
+    },
+    "samples": [
+        {
+            "displayName": "Simulation-Time",
+            "description": "Shows simulation time running",
+            "path": "Samples~/SampleSimulationTime"
+        }
+    ]
 }
