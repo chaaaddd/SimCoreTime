@@ -1,6 +1,8 @@
 using Unity.Entities;
 using UnityEngine.UIElements;
 using UnityEngine;
+using Unity.Entities.UniversalDelegates;
+using Unity.VisualScripting;
 
 namespace SimCore.Time.Samples.SimulationTime
 {
@@ -22,6 +24,10 @@ namespace SimCore.Time.Samples.SimulationTime
         /// The delta time label
         /// </summary>
         private Label deltaTimeLabel;
+        /// <summary>
+        /// The pause time button
+        /// </summary>
+        private Button pauseTimeButton;
 
         /// <summary>
         /// Instantiate a time screen
@@ -35,8 +41,11 @@ namespace SimCore.Time.Samples.SimulationTime
 
             screen.ticksLabel = screen.rootElement.Q<Label>("ticks-label");
             screen.deltaTimeLabel = screen.rootElement.Q<Label>("delta-time-label");
+            screen.pauseTimeButton = screen.rootElement.Q<Button>("pause-time-button");
 
             screen.rootElement.style.display = DisplayStyle.Flex;
+
+            screen.pauseTimeButton.clicked += screen.OnPauseTimeButtonClicked;
 
             return screen;
         }
@@ -57,6 +66,18 @@ namespace SimCore.Time.Samples.SimulationTime
         public void UpdateDeltaTimeLabel(float deltaTime)
         {
             deltaTimeLabel.text = $"Delta Time: {deltaTime}";
+        }
+
+        /// <summary>
+        /// Pause time button callback
+        /// </summary>
+        private void OnPauseTimeButtonClicked()
+        {
+            var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+
+            var entity = entityManager.CreateEntity();
+            entityManager.AddComponent<PauseSimulationTimeEvent>(entity);
+            entityManager.AddComponent<SimulationTimeEvent>(entity);
         }
     }
 }

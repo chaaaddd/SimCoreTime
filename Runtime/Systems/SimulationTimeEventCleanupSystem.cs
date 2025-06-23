@@ -17,7 +17,7 @@ namespace SimCore.Time
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<PauseSimulationTimeEvent>();
+            state.RequireForUpdate<SimulationTimeEvent>();
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SimCore.Time
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var query = SystemAPI.QueryBuilder().WithAll<PauseSimulationTimeEvent>().Build();
+            var query = SystemAPI.QueryBuilder().WithAll<SimulationTimeEvent>().Build();
             state.EntityManager.DestroyEntity(query);
         }
 
