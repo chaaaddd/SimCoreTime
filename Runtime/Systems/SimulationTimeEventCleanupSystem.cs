@@ -6,6 +6,7 @@ namespace SimCore.Time
     /// <summary>
     /// System to clean up time event entities
     /// </summary>
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     [UpdateAfter(typeof(SimulationTimeSystem))]
     [UpdateAfter(typeof(ModifySimulationTimeSystem))]
     internal partial struct SimulationTimeEventCleanupSystem : ISystem

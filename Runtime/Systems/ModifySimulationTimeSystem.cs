@@ -4,6 +4,11 @@ using Unity.Mathematics;
 
 namespace SimCore.Time
 {
+    /// <summary>
+    /// System to modify/manipulate system time
+    /// </summary>
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+    [UpdateAfter(typeof(SimulationTimeSystem))]
     internal partial struct ModifySimulationTimeSystem : ISystem
     {
         /// <summary>
@@ -16,6 +21,10 @@ namespace SimCore.Time
             state.RequireForUpdate<ModifySimulationTimeEvent>();
         }
 
+        /// <summary>
+        /// System update
+        /// </summary>
+        /// <param name="state">The system state</param>
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -45,6 +54,10 @@ namespace SimCore.Time
             }
         }
 
+        /// <summary>
+        /// Destroy the system
+        /// </summary>
+        /// <param name="state">The system state</param>
         [BurstCompile]
         public void OnDestroy(ref SystemState state)
         {
