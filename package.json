@@ -1,11 +1,14 @@
 {
     "name": "com.simcore.time",
-    "version": "0.1.0-pre",
+    "version": "0.1.0",
     "displayName": "SimCore-Time-System",
     "description": "Reuseable ECS simulation time control system",
     "unity": "6.1",
     "dependencies": {
-        "com.unity.entities": "1.2.0"
+        "com.unity.entities": "1.3.8",
+        "com.unity.collections": "2.5.1",
+        "com.unity.burst": "1.8.21",
+        "com.unity.mathematics": "1.3.2"
     },
     "samples": [
         {
