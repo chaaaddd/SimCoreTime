@@ -16,7 +16,18 @@ namespace SimCore.Time.Authoring
         /// If time should start as paused
         /// </summary>
         public bool StartPaused = false;
-
+        /// <summary>
+        /// The time step to use
+        /// </summary>
+        public float TimeStep = 1.0f;
+        /// <summary>
+        /// The minimum time scale
+        /// </summary>
+        public float MinTimeScale = 0.0f;
+        /// <summary>
+        /// The maximum time scale
+        /// </summary>
+        public float MaxTimeScale = 5.0f;
     }
 
     /// <summary>
@@ -37,6 +48,13 @@ namespace SimCore.Time.Authoring
                 IsPaused = authoring.StartPaused,
                 DeltaTime = 0.0f,
                 Tick = 0
+            });
+
+            AddComponent(entity, new SimulationTimeConfig
+            {
+                TimeModificationStepSize = authoring.TimeStep,
+                MinTimeSpeed = authoring.MinTimeScale,
+                MaxTimeSpeed = authoring.MaxTimeScale
             });
         }
     }

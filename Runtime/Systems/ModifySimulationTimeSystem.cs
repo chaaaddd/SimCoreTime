@@ -1,5 +1,6 @@
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace SimCore.Time
 {
@@ -19,6 +20,7 @@ namespace SimCore.Time
         public void OnUpdate(ref SystemState state)
         {
             var time = SystemAPI.GetSingletonRW<SimulationTime>();
+            var timeConfig = SystemAPI.GetSingleton<SimulationTimeConfig>();
 
             foreach (var evt in SystemAPI.Query<RefRO<ModifySimulationTimeEvent>>())
             {
@@ -26,8 +28,12 @@ namespace SimCore.Time
                 switch (evt.ValueRO.Modification)
                 {
                     case ModifySimulationTime.SpeedUp:
+                        time.ValueRW.TimeScale += timeConfig.TimeModificationStepSize;
+                        time.ValueRW.TimeScale = math.clamp(time.ValueRW.TimeScale, timeConfig.MinTimeSpeed, timeConfig.MaxTimeSpeed);
                         break;
                     case ModifySimulationTime.SlowDown:
+                        time.ValueRW.TimeScale -= timeConfig.TimeModificationStepSize;
+                        time.ValueRW.TimeScale = math.clamp(time.ValueRW.TimeScale, timeConfig.MinTimeSpeed, timeConfig.MaxTimeSpeed);
                         break;
                     case ModifySimulationTime.Pause:
                         time.ValueRW.IsPaused = !time.ValueRO.IsPaused;
