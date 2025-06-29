@@ -1,4 +1,5 @@
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -40,6 +41,7 @@ namespace SimCore.Time.Samples.SimulationTime
 
             screens.ValueRO.TimeScreen.Value.UpdateTickLabel(simulationTime.Tick);
             screens.ValueRO.TimeScreen.Value.UpdateDeltaTimeLabel(simulationTime.DeltaTime);
+            screens.ValueRO.TimeScreen.Value.UpdateTimeScaleLabel(simulationTime.TimeScale);
         }
 
         [BurstCompile]
