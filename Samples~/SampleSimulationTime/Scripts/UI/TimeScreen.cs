@@ -76,7 +76,10 @@ namespace SimCore.Time.Samples.SimulationTime
             var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
             var entity = entityManager.CreateEntity();
-            entityManager.AddComponent<PauseSimulationTimeEvent>(entity);
+            entityManager.AddComponent<ModifySimulationTimeEvent>(entity, new ModifySimulationTimeEvent
+            {
+                Modification = ModifySimulationTime.Pause,
+            });
             entityManager.AddComponent<SimulationTimeEvent>(entity);
         }
     }
